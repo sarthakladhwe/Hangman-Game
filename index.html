@@ -31,9 +31,37 @@
             <!-- Legs -->
             <line x1="140" y1="160" x2="120" y2="190" class="figure-part"/>
             <line x1="140" y1="160" x2="160" y2="190" class="figure-part"/>
-
         </svg>
+
+        <div class="wrong-letters-container">
+            <div id="wrong-letters">
+                <p>Wrong</p>
+                <span>e, r, t, y</span>
+            </div> 
+        </div>
+
+        <div class="word" id="word">
+            <div class="letter">h</div>
+            <div class="letter">e</div>
+            <div class="letter">l</div>
+            <div class="letter">l</div>
+            <div class="letter">o</div>
+        </div>
     </div>
+
+    <!-- Container for final messages -->
+    <div class="popup-container" id="popup-container">
+        <div class="popup">
+            <h2 id="final-message">You have won</h2>
+            <button id="play-button">Play again</button>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification-container" id="notification-container">
+        <p>You have already entered this letter</p>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
