@@ -7,19 +7,23 @@ const popup = document.getElementById('popup-container');
 
 const figureParts = document.querySelectorAll('.figure-part');
 
-let randomWord;
-
 const correctLetters = ['a'];
 const wrongLetters = [];
 
-fetch('https://random-word-api.herokuapp.com/word?number=1')
-.then(res => res.json())
-.then(data => {
-    randomWord = data[0];
-    //console.log(randomWord);
-});
+fetchRandomWord();
 
-function displayWord() {
+function fetchRandomWord() {
+    fetch('https://random-word-api.herokuapp.com/word?number=1')
+        .then(res => res.json())
+        .then(data => {
+            const randomWord = data[0];
+            //console.log(randomWord);
+            displayWord(randomWord);
+    });
+}
+
+function displayWord(randomWord) {
+    console.log(randomWord)
     wordEl.innerHTML = `
         ${randomWord
             .split('')
@@ -32,8 +36,6 @@ function displayWord() {
         }
     `;
 }
-
-displayWord();
 
 
 
