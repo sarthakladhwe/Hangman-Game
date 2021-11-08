@@ -7,9 +7,9 @@ const popup = document.getElementById('popup-container');
 
 const figureParts = document.querySelectorAll('.figure-part');
 
-let randomWord = "s";
+let randomWord = "";
 
-const correctLetters = ['a'];
+const correctLetters = [''];
 const wrongLetters = [];
 
 // function fetchRandomWord() {
@@ -54,9 +54,47 @@ function displayWord() {
     if(innerWord === randomWord) {
         finalMessage.innerText = 'Congratulations! You Won!';
         popup.style.display = 'flex';
-    }
-    
+    }    
 }
+
+// Update the wrong letters 
+function updateWrongLettersEl() {
+    console.log("Wrong letter " + wrongLetters);
+}
+
+// Show notification 
+function showNotification() {
+    notification.classList.add('show');
+
+    setTimeout(() => {
+        notification.classList.remove('show');
+    }, 2000)
+}
+
+// Keypad letter press event 
+window.addEventListener('keydown', e => {
+    //console.log(e); 
+    if(e.keyCode >= 65 && e.keyCode <= 90) {
+        const letter = e.key;
+
+        if(randomWord.includes(letter)) {
+            if(!correctLetters.includes(letter)) {
+                correctLetters.push(letter);
+                displayWord();
+            } else {
+                showNotification();
+            }
+        } else {
+            if(!wrongLetters.includes(letter)) {
+                wrongLetters.push(letter);
+
+                updateWrongLettersEl();
+            } else {
+                showNotification();
+            }
+        }
+    }
+});
 
 
 
