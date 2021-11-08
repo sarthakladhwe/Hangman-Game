@@ -59,13 +59,33 @@ function displayWord() {
 
 // Update the wrong letters 
 function updateWrongLettersEl() {
-    console.log("Wrong letter " + wrongLetters);
+    // display wrong eltters
+    wrongLettersEl.innerHTML = `
+        ${wrongLetters.length > 0 ? '<p>Wrong</p>' : ''}
+        ${wrongLetters.map(letter => `<span>${letter}</span>`)}
+    `;
+
+    // display parts
+    figureParts.forEach((part, index) => {
+        const errors = wrongLetters.length;
+
+        if(index < errors) {
+            part.style.display = 'block';
+        } else {
+            part.style.display = 'none';
+        }
+    });
+
+    //lost?
+    if(wrongLetters.length === figureParts.length) {
+        finalMessage.innerText = `Lost! The correct answer was '${randomWord}'`;
+        popup.style.display = 'flex';
+    }
 }
 
 // Show notification 
 function showNotification() {
     notification.classList.add('show');
-
     setTimeout(() => {
         notification.classList.remove('show');
     }, 2000)
@@ -96,7 +116,17 @@ window.addEventListener('keydown', e => {
     }
 });
 
+// Play again event (restart)
+playButton.addEventListener('click', () => {
+    correctLetters.splice(0);
+    wrongLetters.splice(0);
 
+    fetchRandomWord();
+
+    updateWrongLettersEl();
+
+    popup.style.display = 'none';
+});
 
 
 
